@@ -27,6 +27,17 @@ class Post(models.Model):
 
     published_at = models.DateTimeField(auto_now_add=True)
 
+    is_popular = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=False)
+
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = (
+            "order",
+            "created_at",
+        )
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
